@@ -14,7 +14,19 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    status: {
+        type: String,
+        enum: ['active', 'locked'],
+        default: 'active'
+    },
+    commentBannedUntil: Date,
+    commentBanLabel: String
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

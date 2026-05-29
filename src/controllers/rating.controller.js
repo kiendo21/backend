@@ -47,6 +47,16 @@ const RatingController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching rating', error: error.message });
         }
+    },
+
+    getMyRatings: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const ratings = await Rating.find({ userId }).sort({ updatedAt: -1 });
+            return res.status(200).json({ data: ratings });
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching user ratings', error: error.message });
+        }
     }
 };
 

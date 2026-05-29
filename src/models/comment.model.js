@@ -10,6 +10,9 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    title: String,
+    poster: String,
+    releaseDate: String,
     content: {
         type: String,
         required: true
@@ -19,7 +22,30 @@ const commentSchema = new mongoose.Schema({
         required: true,
         min: 1,
         max: 5
-    }
+    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    replies: [{
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        content: {
+            type: String,
+            required: true
+        },
+        likes: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 }, { timestamps: true });
 
 const Comment = mongoose.model('Comment', commentSchema);
