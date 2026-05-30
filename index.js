@@ -16,9 +16,11 @@ import adminRouter from './src/router/admin.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
-    .split(',')
-    .map((origin) => origin.trim());
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://frontend-woad-delta-30.vercel.app',
+    'https://frontend-git-master-kiendo21s-projects.vercel.app'
+];
 
 // Connect to MongoDB
 connectDB();
